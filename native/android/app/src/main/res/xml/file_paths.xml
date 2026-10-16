@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<paths xmlns:android="http://schemas.android.com/apk/res/android">
+    <!--
+        The camera plugin stores captured photos in the external private directory (Pictures/) and temporary files in the cache directory; the share plugin shares exported files and backups from the cache directory.
+        Both plugins generate URIs through this app's FileProvider; without these two entries, taking photos, exporting, and backing up all fail.
+        The FileProvider is not exported and other apps can only read URIs this app grants one by one, so these path scopes do not widen which files are accessible.
+    -->
+    <external-path name="my_images" path="." />
+    <cache-path name="my_cache_images" path="." />
+    <!-- The sticker keyboard uses the FileProvider to grant the target app temporary access to sticker files. -->
+    <files-path name="packs" path="packs/" />
+</paths>

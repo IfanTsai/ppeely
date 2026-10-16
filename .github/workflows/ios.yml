@@ -1,0 +1,47 @@
+# Builds the iOS app on macOS (simulator architecture, unsigned) to confirm the Swift code and project configuration compile with Xcode.
+# macOS runners are expensive, so this runs only when the iOS project or the dependencies and configuration that affect it change; other checks are in ci.yml.
+name: iOS build
+
+on:
+  push:
+    paths:
+      - 'native/ios/**'
+      - 'package.json'
+      - 'package-lock.json'
+      - 'capacitor.config.ts'
+      - '.github/workflows/ios.yml'
+  workflow_dispatch:
+
+# Cancel older builds still running when the same branch is pushed again.
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: macos-15
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 22
+          cache: npm
+
+      - run: npm ci
+
+      - name: Build web assets and sync the iOS project
+        run: |
+          npm run build
+          npx cap sync ios
+
+      - name: Build for the iOS simulator
+        run: |
+          xcodebuild \
+            -project native/ios/App/App.xcodeproj \
+            -scheme App \
+            -sdk iphonesimulator \
+            -destination 'generic/platform=iOS Simulator' \
+            -configuration Debug \
+            CODE_SIGNING_ALLOWED=NO \
+            build

@@ -1,0 +1,82 @@
+# Checks that run on Linux: web layer type checking, unit tests and build, iOS project file and Swift code checks, and the Android debug build.
+# End-to-end tests need an emulator (or Docker for WebKit) and generated test fixtures, so they do not run here; see "Testing" in README.md.
+name: CI
+
+on:
+  # Tags are left to release.yml, which runs these same checks through workflow_call before publishing.
+  push:
+    branches: ['**']
+  pull_request:
+  workflow_dispatch:
+  workflow_call:
+
+permissions:
+  contents: read
+
+# Cancel older checks still running when the same branch is pushed again.
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  web:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 22
+          cache: npm
+
+      - run: npm ci
+
+      # npm run build includes vue-tsc type checking.
+      - run: npm run build
+
+      - run: npm test
+
+  ios-checks:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+
+      - name: Check the Xcode project, Info.plist and plugin method list
+        run: python3 scripts/check-ios-project.py
+
+      - name: Parse and type-check the Swift code
+        run: ./scripts/check-swift.sh
+
+  android:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 22
+          cache: npm
+
+      - uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: 21
+          cache: gradle
+
+      - run: npm ci
+
+      - name: Build web assets and sync the Android project
+        run: |
+          npm run build
+          npx cap sync android
+
+      - name: Build the debug APK
+        working-directory: native/android
+        run: ./gradlew assembleDebug --console=plain
+
+      # Lets reviewers install the build of a pull request without building it themselves.
+      - uses: actions/upload-artifact@v7
+        with:
+          name: ppeely-debug-apk
+          path: native/android/app/build/outputs/apk/debug/app-debug.apk
+          retention-days: 14

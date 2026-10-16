@@ -1,0 +1,10 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="import_sticker_pack">导入贴图包</string>
+    <string name="sticker_keyboard">Ppeely 贴图</string>
+    <string name="keyboard_recent">最近使用</string>
+    <string name="keyboard_empty">打开 Ppeely 制作贴图后即可在这里使用。</string>
+    <string name="keyboard_open_app">打开 Ppeely</string>
+    <string name="keyboard_unsupported">这个输入框不接受贴图。</string>
+    <string name="import_failed">无法读取这个文件。</string>
+</resources>

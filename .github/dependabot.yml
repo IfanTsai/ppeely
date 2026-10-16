@@ -1,0 +1,27 @@
+# Weekly dependency update pull requests, grouped to keep their number down.
+# The Android Gradle dependencies are not listed: their versions come from Capacitor (native/android/variables.gradle
+# and the Capacitor packages), so they are updated together with Capacitor rather than one by one.
+version: 2
+updates:
+  - package-ecosystem: npm
+    directory: /
+    schedule:
+      interval: weekly
+    groups:
+      capacitor:
+        patterns: ['@capacitor/*']
+      ionic:
+        patterns: ['@ionic/*', 'ionicons']
+      fonts:
+        patterns: ['@fontsource/*']
+      dev-dependencies:
+        dependency-type: development
+    ignore:
+      # vue-tsc does not support TypeScript 7 yet.
+      - dependency-name: typescript
+        update-types: ['version-update:semver-major']
+
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly

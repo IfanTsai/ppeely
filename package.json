@@ -1,0 +1,63 @@
+{
+  "name": "ppeely",
+  "private": true,
+  "version": "0.1.0",
+  "license": "MIT",
+  "author": "IfanTsai",
+  "homepage": "https://github.com/IfanTsai/ppeely#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/IfanTsai/ppeely.git"
+  },
+  "bugs": {
+    "url": "https://github.com/IfanTsai/ppeely/issues"
+  },
+  "type": "module",
+  "scripts": {
+    "vendor": "node scripts/copy-vendor.mjs",
+    "dev": "npm run vendor && vite",
+    "typecheck": "vue-tsc --noEmit",
+    "build": "npm run vendor && vue-tsc --noEmit && vite build",
+    "test": "vitest run",
+    "version": "node scripts/sync-version.mjs && git add native/ios/App/App.xcodeproj/project.pbxproj",
+    "android:debug": "./scripts/android-debug.sh",
+    "android:release": "./scripts/android-release.sh"
+  },
+  "dependencies": {
+    "@capacitor/android": "^8.5.3",
+    "@capacitor/app": "^8.1.2",
+    "@capacitor/camera": "^8.2.6",
+    "@capacitor/core": "^8.5.3",
+    "@capacitor/filesystem": "^8.1.5",
+    "@capacitor/ios": "^8.5.3",
+    "@capacitor/preferences": "^8.0.1",
+    "@capacitor/share": "^8.0.3",
+    "@fontsource/alfa-slab-one": "^5.3.0",
+    "@fontsource/anton": "^5.3.0",
+    "@fontsource/comic-neue": "^5.3.0",
+    "@fontsource/cutive-mono": "^5.3.0",
+    "@fontsource/dynapuff": "^5.3.0",
+    "@fontsource/freckle-face": "^5.3.0",
+    "@fontsource/fredoka-one": "^5.3.0",
+    "@fontsource/nunito": "^5.3.0",
+    "@fontsource/sedgwick-ave-display": "^5.3.0",
+    "@ionic/vue": "^9.0.8",
+    "@ionic/vue-router": "^9.0.8",
+    "@mediapipe/tasks-vision": "^1.1.1",
+    "fflate": "^0.8.3",
+    "gifuct-js": "^2.1.2",
+    "ionicons": "^8.1.0",
+    "vue": "^3.5.44",
+    "vue-router": "^5.4.0",
+    "wasm-webp": "^0.1.0"
+  },
+  "devDependencies": {
+    "@capacitor/cli": "^8.5.3",
+    "@vitejs/plugin-vue": "^6.0.10",
+    "playwright-core": "^1.64.1",
+    "typescript": "5.9",
+    "vite": "^8.3.4",
+    "vitest": "^5.0.5",
+    "vue-tsc": "^3.3.13"
+  }
+}

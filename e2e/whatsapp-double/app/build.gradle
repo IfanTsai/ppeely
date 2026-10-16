@@ -1,0 +1,32 @@
+plugins {
+    id 'com.android.application'
+    id 'org.jetbrains.kotlin.android'
+}
+
+android {
+    namespace = "com.ppeely.e2e.whatsappdouble"
+    compileSdk = 36
+
+    defaultConfig {
+        // Same package name as the real WhatsApp: sticker apps use it to detect whether WhatsApp is installed and to query the whitelist.
+        applicationId "com.whatsapp"
+        minSdkVersion 24
+        targetSdkVersion 36
+        versionCode 1
+        versionName "e2e"
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_21
+        targetCompatibility JavaVersion.VERSION_21
+    }
+}
+
+kotlin {
+    jvmToolchain(21)
+}
+
+dependencies {
+    implementation "androidx.appcompat:appcompat:1.7.1"
+    implementation "androidx.core:core-ktx:1.17.0"
+}

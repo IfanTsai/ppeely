@@ -1,0 +1,556 @@
+/* Theme colors and custom styles outside Ionic components. Page structure, lists, buttons and dialogs all use Ionic's component styles. */
+:root {
+  --ion-color-primary: #16a05c;
+  --ion-color-primary-rgb: 22, 160, 92;
+  --ion-color-primary-contrast: #ffffff;
+  --ion-color-primary-contrast-rgb: 255, 255, 255;
+  --ion-color-primary-shade: #138d51;
+  --ion-color-primary-tint: #2daa6c;
+  --app-line: rgba(var(--ion-text-color-rgb, 0, 0, 0), 0.12);
+  --app-muted: var(--ion-color-medium);
+}
+
+body {
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-touch-callout: none;
+}
+
+button {
+  font: inherit;
+  color: inherit;
+  border: 0;
+  background: none;
+  padding: 0;
+}
+
+/* Error screen rendered directly by main.ts when startup fails; Ionic components are not available yet. */
+.startup-error {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  margin: 30vh 24px 0;
+  text-align: center;
+  line-height: 1.6;
+}
+
+.startup-error button {
+  padding: 10px 24px;
+  border-radius: 8px;
+  color: var(--ion-color-primary-contrast);
+  background: var(--ion-color-primary);
+}
+
+/* Open-source licenses page: license text is reflowed to the screen width and can be selected and copied. */
+.licenses {
+  font-size: 13px;
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+  user-select: text;
+  -webkit-user-select: text;
+}
+
+.licenses-intro {
+  margin: 0 0 16px;
+  color: var(--app-muted);
+}
+
+.licenses-section {
+  padding: 16px 0;
+  border-top: 1px solid var(--app-line);
+}
+
+.licenses-component {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 8px;
+}
+
+.licenses-component span {
+  font-size: 12px;
+  color: var(--app-muted);
+}
+
+.licenses-text {
+  margin: 8px 0 0;
+  font-size: 12px;
+  color: var(--app-muted);
+}
+
+.licenses-label {
+  margin: 12px 0 0;
+  font-weight: 600;
+}
+
+.toolbar-subtitle {
+  font-size: 12px;
+  font-weight: 400;
+  color: var(--app-muted);
+}
+
+.empty {
+  margin: 16vh 24px 0;
+  text-align: center;
+  color: var(--app-muted);
+  line-height: 1.6;
+}
+
+.empty strong {
+  display: block;
+  color: var(--ion-text-color);
+  font-size: 18px;
+  margin-bottom: 4px;
+}
+
+.note {
+  margin: 0 4px 12px;
+  color: var(--app-muted);
+  font-size: 13px;
+  line-height: 1.45;
+}
+
+/* Toggles used only to show state: taps are handled by the containing row. */
+.display-only {
+  pointer-events: none;
+}
+
+/* Checkerboard background for transparent areas */
+.checker {
+  background-color: #fff;
+  background-image:
+    linear-gradient(45deg, #d9dce2 25%, transparent 25%), linear-gradient(-45deg, #d9dce2 25%, transparent 25%),
+    linear-gradient(45deg, transparent 75%, #d9dce2 75%), linear-gradient(-45deg, transparent 75%, #d9dce2 75%);
+  background-size: 16px 16px;
+  background-position:
+    0 0,
+    0 8px,
+    8px -8px,
+    -8px 0;
+}
+
+/* Sticker pack list on the home screen */
+.pack-row {
+  display: flex;
+  gap: 12px;
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 10px;
+  text-align: left;
+  align-items: center;
+  border-radius: 14px;
+  border: 1px solid var(--app-line);
+  background: var(--ion-item-background, var(--ion-background-color));
+}
+
+.pack-row:active {
+  opacity: 0.7;
+}
+
+.pack-tray {
+  width: 60px;
+  height: 60px;
+  border-radius: 12px;
+  overflow: hidden;
+  flex: none;
+  display: block;
+}
+
+.pack-tray img,
+.pack-preview img,
+.slot img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
+
+.pack-info {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.pack-info strong {
+  font-size: 16px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.pack-info small {
+  color: var(--app-muted);
+  font-size: 13px;
+}
+
+.badge {
+  font-style: normal;
+  margin-left: 8px;
+  padding: 1px 7px;
+  border-radius: 8px;
+  background: var(--ion-color-primary);
+  color: var(--ion-color-primary-contrast);
+  font-size: 11px;
+}
+
+.pack-preview {
+  display: flex;
+  gap: 6px;
+}
+
+.pack-preview img,
+.pack-preview span {
+  width: 34px;
+  height: 34px;
+}
+
+/* Sticker pack maker screen */
+.tray-row {
+  display: flex;
+  gap: 14px;
+  align-items: center;
+  padding: 12px;
+  margin-bottom: 14px;
+  border-radius: 14px;
+  border: 1px solid var(--app-line);
+}
+
+.tray-row .slot {
+  width: 72px;
+  flex: none;
+}
+
+.tray-row small {
+  display: block;
+  margin-top: 4px;
+  color: var(--app-muted);
+  font-size: 13px;
+  line-height: 1.4;
+}
+
+.slot-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+}
+
+.slot {
+  position: relative;
+  aspect-ratio: 1;
+  border-radius: 12px;
+  overflow: hidden;
+  display: grid;
+  place-items: center;
+  color: var(--app-muted);
+  font-size: 26px;
+}
+
+.empty-slot {
+  border: 1.5px dashed var(--app-line);
+}
+
+.slot-emojis {
+  position: absolute;
+  right: 3px;
+  bottom: 2px;
+  font-size: 12px;
+  line-height: 1;
+  background: rgba(255, 255, 255, 0.85);
+  border-radius: 6px;
+  padding: 2px 3px;
+}
+
+.emoji-group-title {
+  margin: 14px 4px 6px;
+  color: var(--app-muted);
+  font-size: 13px;
+}
+
+.emoji-grid {
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  gap: 4px;
+}
+
+.emoji {
+  aspect-ratio: 1;
+  font-size: 26px;
+  border-radius: 8px;
+  display: grid;
+  place-items: center;
+}
+
+.emoji.selected {
+  background: var(--ion-color-primary);
+}
+
+/* Editor: full-screen modal with a dark background */
+ion-modal.editor-modal,
+ion-modal.page-modal,
+ion-modal.text-editor-modal {
+  --width: 100%;
+  --height: 100%;
+  --border-radius: 0;
+}
+
+ion-modal.text-editor-modal {
+  --background: rgba(0, 0, 0, 0.84);
+}
+
+.editor-content,
+.text-editor-content {
+  --background: #1b1d22;
+  color: #fff;
+}
+
+.text-editor-content {
+  --background: transparent;
+}
+
+.cut-step,
+.decorate-step {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.cut-canvas {
+  flex: 1;
+  min-height: 0;
+  width: 100%;
+  touch-action: none;
+  display: block;
+}
+
+.cut-hint {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  padding: 10px 16px;
+  background: rgba(0, 0, 0, 0.66);
+  font-size: 13px;
+  line-height: 1.45;
+  text-align: center;
+  white-space: pre-line;
+  pointer-events: none;
+  transition: opacity 0.2s;
+}
+
+.cut-undo {
+  position: absolute;
+  right: 12px;
+  top: 64px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 42px;
+  padding: 0 14px;
+  border-radius: 12px;
+  background: rgba(0, 0, 0, 0.7);
+  color: #fff;
+  font-weight: 600;
+}
+
+.cut-tools,
+.decorate-tools {
+  flex: none;
+  padding: 8px 8px calc(10px + var(--ion-safe-area-bottom, 0px));
+  background: #1b1d22;
+  border-top: 1px solid #2c2f37;
+  transition: opacity 0.2s;
+}
+
+.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.tool-row {
+  display: flex;
+  gap: 6px;
+  justify-content: center;
+}
+
+.tool-row + .tool-row {
+  margin-top: 6px;
+}
+
+.tool-row ion-button {
+  flex: 1;
+  margin: 0;
+}
+
+.tool {
+  flex: 1;
+  max-width: 110px;
+  min-height: 54px;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  font-size: 11px;
+  color: #c9ced8;
+}
+
+.tool ion-icon {
+  font-size: 22px;
+}
+
+.tool.active {
+  background: var(--ion-color-primary);
+  color: #fff;
+}
+
+.stage {
+  position: relative;
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
+  touch-action: none;
+}
+
+.stage-base {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+}
+
+.stage-layer {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  touch-action: none;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+.delete-zone {
+  position: absolute;
+  left: 50%;
+  bottom: 22px;
+  width: 54px;
+  height: 54px;
+  margin-left: -27px;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.72);
+  color: #fff;
+  font-size: 24px;
+  display: grid;
+  place-items: center;
+  opacity: 0;
+  transition:
+    transform 0.15s,
+    background 0.15s,
+    opacity 0.15s;
+  pointer-events: none;
+}
+
+.delete-zone.visible {
+  opacity: 1;
+}
+
+.delete-zone.active {
+  transform: scale(1.4);
+  background: var(--ion-color-danger);
+}
+
+.outline-panel {
+  flex: none;
+  padding: 6px 16px 4px;
+  background: #23262d;
+}
+
+.panel-title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 40px;
+  font-size: 13px;
+  color: #c9ced8;
+}
+
+.color-row {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  padding: 6px 0;
+}
+
+.color-dot {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: 2px solid rgba(255, 255, 255, 0.55);
+  flex: none;
+}
+
+.color-dot.selected {
+  outline: 3px solid var(--ion-color-primary);
+  outline-offset: 2px;
+}
+
+.text-editor {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: calc(12px + var(--ion-safe-area-top, 0px)) 16px calc(12px + var(--ion-safe-area-bottom, 0px));
+  color: #fff;
+}
+
+.text-editor-bar {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.text-editor-bar ion-button {
+  margin: 0;
+}
+
+.text-editor-bar .font-button {
+  flex: 1;
+  min-width: 0;
+  text-transform: none;
+}
+
+.text-preview {
+  flex: 1;
+  min-height: 60px;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+}
+
+.text-preview img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+
+.text-input {
+  --background: rgba(255, 255, 255, 0.94);
+  --color: #111;
+  --placeholder-color: #666;
+  --padding-start: 12px;
+  --padding-end: 12px;
+  --border-radius: 12px;
+  border-radius: 12px;
+  font-size: 18px;
+  text-align: center;
+  flex: none;
+}
+
+/* Toasts are display-only and must not block the buttons beneath them. */
+ion-toast::part(wrapper) {
+  pointer-events: none;
+}

@@ -1,0 +1,16 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <!-- Strings marked translatable="false" are names, identifiers, and symbols shared by all languages; all other text has a translation in values-zh. -->
+    <string name="app_name" translatable="false">Ppeely</string>
+    <string name="title_activity_main" translatable="false">Ppeely</string>
+    <string name="package_name" translatable="false">com.ppeely.stickers</string>
+    <string name="custom_url_scheme" translatable="false">com.ppeely.stickers</string>
+    <string name="import_sticker_pack">Import sticker pack</string>
+    <string name="sticker_keyboard">Ppeely stickers</string>
+    <string name="keyboard_recent">Recent</string>
+    <string name="keyboard_switch" translatable="false">⌨ ABC</string>
+    <string name="keyboard_empty">Open Ppeely to create stickers and use them here.</string>
+    <string name="keyboard_open_app">Open Ppeely</string>
+    <string name="keyboard_unsupported">This text field does not accept stickers.</string>
+    <string name="import_failed">Unable to read this file.</string>
+</resources>

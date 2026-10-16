@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- Since Android 11, packages to query must be declared; otherwise the app cannot tell whether WhatsApp is installed or query whether a sticker pack has been added. -->
+    <queries>
+        <package android:name="com.whatsapp" />
+        <package android:name="com.whatsapp.w4b" />
+    </queries>
+
+    <!-- The app has its own offline backup ("Backup" in Settings) and does not use the system cloud backup. -->
+    <application
+        android:allowBackup="false"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+
+        <activity
+            android:configChanges="orientation|keyboardHidden|keyboard|screenSize|locale|smallestScreenSize|screenLayout|uiMode|navigation|density"
+            android:name=".MainActivity"
+            android:label="@string/title_activity_main"
+            android:theme="@style/AppTheme.NoActionBarLaunch"
+            android:launchMode="singleTask"
+            android:windowSoftInputMode="adjustResize"
+            android:exported="true">
+
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+
+        </activity>
+
+        <!--
+            Trampoline activity with no UI that receives sticker pack files. The "Open .wastickers files" setting takes effect by enabling or disabling this component,
+            without affecting the app's own launcher entry point.
+        -->
+        <activity
+            android:name=".ImportActivity"
+            android:label="@string/app_name"
+            android:theme="@android:style/Theme.NoDisplay"
+            android:excludeFromRecents="true"
+            android:noHistory="true"
+            android:exported="true">
+
+            <!-- Open .wastickers sticker pack files from file managers and other apps (content:// sources are matched by MIME type). -->
+            <intent-filter android:label="@string/import_sticker_pack">
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data android:scheme="content" />
+                <data android:mimeType="application/zip" />
+                <data android:mimeType="application/octet-stream" />
+                <data android:mimeType="application/wastickers" />
+                <data android:mimeType="application/x-wastickers" />
+            </intent-filter>
+
+            <!-- file:// sources have no reliable MIME type, so match by extension; pathPattern does not support greedy matching, so there is one entry per dot in the file name. -->
+            <intent-filter android:label="@string/import_sticker_pack">
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data android:scheme="file" />
+                <data android:host="*" />
+                <data android:pathPattern="/.*\\.wastickers" />
+                <data android:pathPattern="/.*\\..*\\.wastickers" />
+                <data android:pathPattern="/.*\\..*\\..*\\.wastickers" />
+                <data android:pathPattern="/.*\\..*\\..*\\..*\\.wastickers" />
+                <data android:pathPattern="/.*\\..*\\..*\\..*\\..*\\.wastickers" />
+            </intent-filter>
+
+            <!-- Other apps send sticker pack files here via "Share". -->
+            <intent-filter android:label="@string/import_sticker_pack">
+                <action android:name="android.intent.action.SEND" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:mimeType="application/zip" />
+                <data android:mimeType="application/octet-stream" />
+                <data android:mimeType="application/wastickers" />
+                <data android:mimeType="application/x-wastickers" />
+            </intent-filter>
+
+        </activity>
+
+        <!-- Sticker keyboard (input method). -->
+        <service
+            android:name=".keyboard.StickerKeyboardService"
+            android:label="@string/sticker_keyboard"
+            android:permission="android.permission.BIND_INPUT_METHOD"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.view.InputMethod" />
+            </intent-filter>
+            <meta-data
+                android:name="android.view.im"
+                android:resource="@xml/method" />
+        </service>
+
+        <!-- WhatsApp reads sticker packs through this provider; readPermission is defined and held by WhatsApp. -->
+        <provider
+            android:name=".whatsapp.StickerContentProvider"
+            android:authorities="${applicationId}.stickercontentprovider"
+            android:enabled="true"
+            android:exported="true"
+            android:readPermission="com.whatsapp.sticker.READ" />
+
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="${applicationId}.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths"></meta-data>
+        </provider>
+    </application>
+</manifest>

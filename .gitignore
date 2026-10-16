@@ -1,0 +1,11 @@
+node_modules/
+dist/
+*.apk
+release/
+.DS_Store
+*.log
+public/mediapipe/
+e2e/output/
+e2e/fixtures/
+.vscode/
+.idea/
