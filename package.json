@@ -52,12 +52,12 @@
     "wasm-webp": "^0.1.0"
   },
   "devDependencies": {
-    "@capacitor/cli": "^8.5.3",
+    "@capacitor/cli": "^8.6.0",
     "@vitejs/plugin-vue": "^6.0.10",
-    "playwright-core": "^1.64.1",
+    "playwright-core": "^1.65.0",
     "typescript": "5.9",
-    "vite": "^8.3.4",
-    "vitest": "^5.0.5",
-    "vue-tsc": "^3.3.13"
+    "vite": "^8.3.7",
+    "vitest": "^5.1.0",
+    "vue-tsc": "^3.3.14"
   }
 }
