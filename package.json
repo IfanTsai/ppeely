@@ -48,7 +48,7 @@
     "gifuct-js": "^2.1.2",
     "ionicons": "^8.1.0",
     "vue": "^3.5.44",
-    "vue-router": "^5.4.0",
+    "vue-router": "^5.5.0",
     "wasm-webp": "^0.1.0"
   },
   "devDependencies": {
